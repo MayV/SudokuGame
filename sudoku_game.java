@@ -68,9 +68,21 @@ public class sudoku_game {
 				fieldref[i][j] = field;
 			}
 		JPanel control = new JPanel(new FlowLayout());
+		JButton reset = new JButton("Reset");
 		JButton submit = new JButton("Submit");
 		JButton solve = new JButton("Solve");
 		JButton newgame = new JButton("New Game");
+		control.add(reset);
+		reset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				for(int i=0;i<n;i++)
+					for(int j=0;j<n;j++)
+						if(pseudoboard[i][j]==0)
+							fieldref[i][j].setText("");
+			}
+		});
 		control.add(submit);
 		submit.addActionListener(new ActionListener() {	
 			@Override
@@ -128,11 +140,13 @@ public class sudoku_game {
 									break;
 							}
 							if(!correct)
-							{
-								JOptionPane.showMessageDialog(new JFrame(), "Wrong Answer. Try again.");
 								break;
-							}
 						}
+						if(!correct)
+							JOptionPane.showMessageDialog(new JFrame(), "Wrong Answer. Try again.");
+						else
+							JOptionPane.showMessageDialog(new JFrame(), "Right Answer. You Won. :)");
+						
 					}
 				}
 			}
